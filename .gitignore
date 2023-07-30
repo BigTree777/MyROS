@@ -5,6 +5,7 @@ install
 setup_shell
 utils
 __pycache__
+my_ws_python/src/viewer_pointcloud/viewer_pointcloud/include
 
 # from https://github.com/github/gitignore/blob/main/ROS.gitignore
 devel/
