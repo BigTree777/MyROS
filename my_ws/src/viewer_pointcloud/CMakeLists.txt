@@ -18,8 +18,12 @@ find_package(pcl_ros REQUIRED)
 
 # set target
 add_executable(publisher_pointcloud src/publisher_pointcloud.cpp)
+add_executable(subscriber_pointcloud src/subscriber_pointcloud.cpp)
 ament_target_dependencies(publisher_pointcloud rclcpp sensor_msgs PCL pcl_conversions pcl_ros)
+ament_target_dependencies(subscriber_pointcloud rclcpp sensor_msgs)
 install(TARGETS publisher_pointcloud DESTINATION lib/${PROJECT_NAME})
+install(TARGETS subscriber_pointcloud DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
