@@ -49,7 +49,7 @@ PointCloudPublisher::PointCloudPublisher(std::string path, std::string topic_nam
     filelist_ = makeFileList(path_);
     it_ = filelist_.begin();
     cloud_ = readPointCloud(*it_);
-    vg_.setLeafSize(0.01f, 0.01f, 0.01f);
+    vg_.setLeafSize(0.1f, 0.1f, 0.1f);
     vg_.setInputCloud(cloud_);
     vg_.filter(*cloud_);
 }
@@ -83,11 +83,6 @@ bool PointCloudPublisher::readPCDBinMain(const std::string& fname, pcl::PointClo
 }
 
 bool PointCloudPublisher::readPCDBin(const std::string& fname, const pcl::PointCloud<pcl::PointXYZI>::Ptr& cloud) {
-    std::ifstream file(fname, std::ios::in | std::ios::binary);
-    if (!file.good()) {
-        PCL_ERROR("Couldn't read file");
-        return false;
-    }
     return readPCDBinMain(fname, *cloud);
 }
 
@@ -101,6 +96,7 @@ void PointCloudPublisher::publish(){
     if(it_ == filelist_.end()){
         it_ = filelist_.begin();
     }
+    RCLCPP_INFO(node_->get_logger(), "Publishing: '%s'", it_->c_str());
     cloud_ = readPointCloud(*it_);
     vg_.setInputCloud(cloud_);
     vg_.filter(*cloud_);

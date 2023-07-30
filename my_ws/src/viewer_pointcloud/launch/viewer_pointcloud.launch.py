@@ -10,8 +10,14 @@ def generate_launch_description():
             package='viewer_pointcloud',
             executable='subscriber_pointcloud'
             )
+    node_3 = Node(
+            package="rviz2",
+            executable="rviz2",
+            name="rviz2"
+            )
     
     return LaunchDescription([
         node_1,
-        node_2
+        node_2,
+        node_3
     ])

@@ -13,7 +13,8 @@
 int main(int argc, char** argv){
     rclcpp::init(argc, argv);
     PointCloudPublisher pcp("/data/nuscenes/sweeps/LIDAR_TOP", "pointcloud", "map", 0);
-    rclcpp::Rate loop_rate(1.0);
+    // 周波数を10Hzに設定
+    rclcpp::WallRate loop_rate(10);
     while(rclcpp::ok()){
         pcp.publish();
         loop_rate.sleep();
